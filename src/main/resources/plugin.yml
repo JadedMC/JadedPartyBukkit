@@ -1,0 +1,6 @@
+name: JadedPartyBukkit
+version: '${project.version}'
+main: net.jadedmc.jadedpartybukkit.JadedPartyBukkit
+api-version: 1.19
+depend:
+  - JadedChat
