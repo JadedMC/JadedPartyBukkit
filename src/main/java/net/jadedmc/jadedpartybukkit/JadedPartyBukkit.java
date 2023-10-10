@@ -29,7 +29,7 @@ public final class JadedPartyBukkit extends JavaPlugin implements PluginMessageL
         if(!JadedChat.channelExists("PARTY")) {
             ChatChannel partyChat = new ChatChannelBuilder("PARTY")
                     .setDisplayName("<green>PARTY</green>")
-                    .addAliases("p", "pc")
+                    .addAliases("P", "PC")
                     .useBungeecord(true)
                     .addChatFormat(new ChatFormatBuilder("default")
                             .addSection("channel", "<gray>[<green>Party<gray> <white>")
