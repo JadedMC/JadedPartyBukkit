@@ -8,6 +8,8 @@ import net.jadedmc.jadedchat.features.channels.channel.ChatChannelBuilder;
 import net.jadedmc.jadedchat.features.channels.fomat.ChatFormatBuilder;
 import net.jadedmc.jadedpartybukkit.listeners.ChannelBungeeReceiveListener;
 import net.jadedmc.jadedpartybukkit.listeners.ChannelBungeeSendListener;
+import net.jadedmc.jadedpartybukkit.listeners.ChannelMessageSendListener;
+import net.jadedmc.jadedpartybukkit.listeners.ChannelSwitchListener;
 import net.jadedmc.jadedpartybukkit.party.PartyManager;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -44,6 +46,8 @@ public final class JadedPartyBukkit extends JavaPlugin implements PluginMessageL
 
         getServer().getPluginManager().registerEvents(new ChannelBungeeReceiveListener(this), this);
         getServer().getPluginManager().registerEvents(new ChannelBungeeSendListener(this), this);
+        getServer().getPluginManager().registerEvents(new ChannelMessageSendListener(this), this);
+        getServer().getPluginManager().registerEvents(new ChannelSwitchListener(this), this);
 
         getServer().getMessenger().registerIncomingPluginChannel(this, "jadedmc:party", this);
         getServer().getMessenger().registerOutgoingPluginChannel(this, "jadedmc:party");
