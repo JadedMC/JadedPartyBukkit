@@ -3,9 +3,9 @@ package net.jadedmc.jadedpartybukkit.party;
 import com.google.common.collect.Iterables;
 import com.google.common.io.ByteArrayDataOutput;
 import com.google.common.io.ByteStreams;
+import net.jadedmc.jadedchat.JadedChat;
 import net.jadedmc.jadedpartybukkit.JadedPartyBukkit;
 import org.bukkit.Bukkit;
-import org.bukkit.block.data.type.Bed;
 import org.bukkit.entity.Player;
 
 import java.util.HashMap;
@@ -33,6 +33,20 @@ public class PartyManager {
      * @param uuid UUID of the party that is disbanded.
      */
     public void disbandParty(UUID uuid) {
+        Party party = parties.get(uuid);
+
+        if(party != null) {
+            for(UUID playerUUID : party.getPlayers()) {
+                Player player = Bukkit.getPlayer(playerUUID);
+
+                if(player == null) {
+                    continue;
+                }
+
+                JadedChat.setChannel(player, JadedChat.getDefaultChannel());
+            }
+        }
+
         parties.remove(uuid);
     }
 
