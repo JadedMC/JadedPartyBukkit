@@ -29,9 +29,14 @@ import net.jadedmc.jadedchat.features.channels.events.ChannelMessageSendEvent;
 import net.jadedmc.jadedchat.utils.ChatUtils;
 import net.jadedmc.jadedpartybukkit.JadedPartyBukkit;
 import net.jadedmc.jadedpartybukkit.party.Party;
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 
 /**
  * Listens to the ChannelMessageSendEvent, which is called every time a player sends a message in a chat channel.
@@ -63,6 +68,19 @@ public class ChannelMessageSendListener implements Listener {
         if(party == null) {
             ChatUtils.chat(player, "&cYou are not in a party! You can go back to global with /chat global");
             event.setCancelled(true);
+            return;
         }
+
+        List<Player> viewers = new ArrayList<>();
+
+        for(UUID uuid : party.getPlayers()) {
+            Player viewer = Bukkit.getPlayer(uuid);
+
+            if(viewer != null) {
+                viewers.add(player);
+            }
+        }
+
+        event.setViewers(viewers);
     }
 }
