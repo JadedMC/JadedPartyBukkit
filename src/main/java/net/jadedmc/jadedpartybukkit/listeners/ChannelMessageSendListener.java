@@ -77,7 +77,7 @@ public class ChannelMessageSendListener implements Listener {
             Player viewer = Bukkit.getPlayer(uuid);
 
             if(viewer != null) {
-                viewers.add(player);
+                viewers.add(viewer);
             }
         }
 
