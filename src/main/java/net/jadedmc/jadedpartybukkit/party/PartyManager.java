@@ -5,6 +5,7 @@ import com.google.common.io.ByteArrayDataOutput;
 import com.google.common.io.ByteStreams;
 import net.jadedmc.jadedchat.JadedChat;
 import net.jadedmc.jadedpartybukkit.JadedPartyBukkit;
+import net.jadedmc.jadedpartybukkit.events.PartySyncEvent;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
@@ -25,7 +26,10 @@ public class PartyManager {
      * @param message Bungeecord message.
      */
     public void syncParty(String message) {
-        parties.put(UUID.fromString(message.split("~")[0]), new Party(message));
+        Party party = new Party(message);
+        parties.put(UUID.fromString(message.split("~")[0]), party);
+
+        plugin.getServer().getPluginManager().callEvent(new PartySyncEvent(party));
     }
 
     /**
